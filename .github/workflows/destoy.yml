@@ -1,0 +1,30 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:  # Allows manual trigger of the workflow
+
+jobs:
+  terraform-destroy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.5.0  # You can specify the Terraform version here
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan for Destroy
+        run: terraform plan -destroy -out=tfplan
+
+      - name: Terraform Destroy
+        run: terraform apply -auto-approve tfplan  # Destroys the Terraform configuration
+        env:
+          TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_region: ${{ secrets.AWS_REGION }}
