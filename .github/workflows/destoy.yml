@@ -14,13 +14,13 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.5.0  # You can specify the Terraform version here
-
+          terraform_version: v1.9.8 
+          
       - name: Terraform Init
         run: terraform init
-
+        
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve  # Destroys the Terraform configuration
+        run: terraform destroy -auto-approve  
         env:
           TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
