@@ -25,9 +25,6 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Plan (for destroy)
-        run: terraform plan -destroy
-
       - name: Terraform Apply (destroy)
         run: terraform apply -auto-approve
         env:
