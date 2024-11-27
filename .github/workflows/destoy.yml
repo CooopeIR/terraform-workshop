@@ -19,11 +19,8 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Plan for Destroy
-        run: terraform plan -destroy -out=tfplan
-
       - name: Terraform Destroy
-        run: terraform apply -auto-approve tfplan  # Destroys the Terraform configuration
+        run: terraform destroy -auto-approve  # Destroys the Terraform configuration
         env:
           TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
