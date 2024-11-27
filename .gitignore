@@ -3,6 +3,8 @@
 
 .terraform.lock.hcl
 
+/Screenshots
+
 # Backup files created by Terraform
 *.backup
 
